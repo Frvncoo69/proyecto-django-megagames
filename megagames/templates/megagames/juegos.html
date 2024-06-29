@@ -142,9 +142,25 @@
 
   <div class="container">
     <input type="text" id="nombre" class="form-control mb-3 mt-3" placeholder="Buscar por nombre de juego">
-    <div class="row row-cols-1 row-cols-md-4 g-4" id="contenedorJuego">
-      <!-- Las tarjetas generadas se agregarán aquí -->
-    </div>
+    <div class="container mt-5">
+      <div class="row">
+          {% for juego in juegos %}
+          <div class="col-md-4 mb-4">
+              <div class="card">
+                  {% if juego.imagen %}
+                  <img src="{{ juego.imagen }}" class="card-img-top" alt="{{ juego.nombre }}">
+                  {% endif %}
+                  <div class="card-body">
+                      <h5 class="card-title">{{ juego.nombre }}</h5>
+                      <p class="card-text">{{ juego.descripcion }}</p>
+                      <p class="card-text"><strong>Precio:</strong> ${{ juego.precio }}</p>
+                      <p class="card-text"><strong>Stock:</strong> {{ juego.stock }}</p>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
   </div>
   
   <footer>
@@ -173,7 +189,7 @@
     <div class="copyright-container">
       <span class="copyright">Copyright 2024, Todos los derechos reservados.</span>
     </div>
-  </footer>
+  </footer>aaaaa
 
 
 </body>
