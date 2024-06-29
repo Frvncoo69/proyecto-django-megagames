@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio de sesión</title>
+    <link rel="shortcut icon" href="{% static 'megagames/img/iconl.png' %}"type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'megagames/css/login.css' %}"/>
+  </head>
+  <body>
+    <div class="box">
+      <form id="loginForm">
+        <div class="title">
+          <h1>Inicia sesión</h1>
+        </div>
+        <div class="input-box">
+          <label for="username" class="label-color">Usuario</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Ingresa tu nombre de usuario"
+            required
+          />
+          <br />
+          <label for="password" class="label-color">Contraseña</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            required
+          />
+          <br />
+          <input type="submit" class="Login" value="Login" />
+          <br />
+          <p class="link-text">¿Olvidaste tu contraseña? <a href="#">Haz click acá</a></p>
+          <p class="link-text">¿Aún no tienes una cuenta?<a href="#">Haz click acá</a></p>
+          <a href="{% url 'principal' %}" class="link-text mb-2">Volver</a>
+        </div>
+      </form>
+    </div>
+    
+  </body>
+</html>
