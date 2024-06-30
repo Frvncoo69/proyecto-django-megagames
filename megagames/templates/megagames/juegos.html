@@ -143,25 +143,29 @@
   <div class="container">
     <input type="text" id="nombre" class="form-control mb-3 mt-3" placeholder="Buscar por nombre de juego">
     <div class="container mt-5">
-      <div class="row">
-          {% for juego in juegos %}
-          <div class="col-md-4 mb-4">
-              <div class="card">
-                  {% if juego.imagen %}
-                  <img src="{{ juego.imagen }}" class="card-img-top" alt="{{ juego.nombre }}">
-                  {% endif %}
-                  <div class="card-body">
-                      <h5 class="card-title">{{ juego.nombre }}</h5>
-                      <p class="card-text">{{ juego.descripcion }}</p>
-                      <p class="card-text"><strong>Precio:</strong> ${{ juego.precio }}</p>
-                      <p class="card-text"><strong>Stock:</strong> {{ juego.stock }}</p>
-                  </div>
-              </div>
-          </div>
-          {% endfor %}
-      </div>
-  </div>
-  </div>
+        <div class="row">
+            {% for juego in juegos %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if juego.imagen %}
+                    <!-- Asegúrate de usar la URL de la imagen correcta -->
+                    <img src="{{ juego.imagen.url }}" class="card-img-top" alt="{{ juego.nombre }}">
+                    {% else %}
+                    <!-- Si no hay imagen, puedes mostrar una imagen de placeholder o un mensaje -->
+                    <img src="{% static 'placeholder.jpg' %}" class="card-img-top" alt="Imagen no disponible">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ juego.nombre }}</h5>
+                        <p class="card-text">{{ juego.descripcion }}</p>
+                        <p class="card-text"><strong>Precio:</strong> ${{ juego.precio }}</p>
+                        <p class="card-text"><strong>Stock:</strong> {{ juego.stock }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
   
   <footer>
     <div class="footer-container">

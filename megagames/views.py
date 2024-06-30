@@ -26,9 +26,9 @@ def juegounico (request):
     return render (request, 'megagames/juego-unico.html',context)
 
 def juegos(request):
-    juegos = juego.objects.all()
-    context = {'juegos': juegos}
-    return render(request, 'megagames/juegos.html', context)
+    juegos = juego.objects.all()  # Obtén todos los juegos desde la base de datos
+    context = {'juegos': juegos}  # Crea un contexto con los juegos
+    return render(request, 'megagames/juegos.html', context)  # Renderiza la plantilla con el contexto}
 
 def login (request):
     context ={}
