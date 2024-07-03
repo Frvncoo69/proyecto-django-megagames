@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mega Games</title>
+  <link rel="shortcut icon" href="{% static 'megagames/img/iconl.png' %}" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'megagames/css/acerca-de.css' %}">
+  <link rel="stylesheet" href="{% static 'megagames/css/principal.css' %}">
+</head>
+
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-left">
+        <a href="{% url 'principal' %}" class="nav-brand">
+          <img src="{% static 'megagames/img/logo.png' %}" alt="logo_1">
+        </a>
+
+        <ul class="nav-menu">
+          <li>
+            <a href="{% url 'juegos' %}" class="nav-link">Tienda</a>
+          </li>
+          <li>
+            <a href="{% url 'acercade' %}" class="nav-link">Acerca de</a>
+          </li>
+          <li>
+            <a href="{% url 'soporte' %}" class="nav-link">Soporte</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <a class="nav-link btn-primary" href="{% url 'crearusuario' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M12 19v-7m0 0V5m0 7H5m7 0h7" stroke="#F2F2F2" fill="none" stroke-width="2px"></path>
+          </svg>
+          Crear cuenta
+        </a>
+        <div class="nav-right">
+          <a class="nav-link btn-primary" href="{% url 'login' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M12 19v-7m0 0V5m0 7H5m7 0h7" stroke="#F2F2F2" fill="none" stroke-width="2px"></path>
+            </svg>
+            Iniciar sesión
+          </a>
+
+          <button class="nav-link btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M9 18.542a62.872 62.872 0 0 1-3.94-.313 1.676 1.676 0 0 1-1.404-2.195c.171-.513.343-1.018.389-1.561l.375-4.497a7.608 7.608 0 0 1 15.162 0l.375 4.499c.045.543.217 1.048.388 1.56a1.675 1.675 0 0 1-1.405 2.194c-1.31.145-2.624.25-3.94.313m-6 0V19a3 3 0 1 0 6 0v-.459m-6 0a62.83 62.83 0 0 0 6 0" stroke="#F2F2F2" fill="none" stroke-width="2px"></path>
+            </svg>
+          </button>
+          <div class="dropdown-container">
+            <a href="#" class="nav-link btn-profile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path fill="#F2F2F2" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"></path>
+              </svg>
+              <span>Usuario</span>
+            </a>
+
+            <div class="dropdown-menu profile-dropdown">
+              <a href="{% url 'login' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path fill="#D1D5DB" d="M20 22h-2v-2a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v2H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+                </svg>
+                <span>Tu perfil</span>
+              </a>
+              <a href="{% url 'soporte' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path fill="#D1D5DB" d="M10 3h4a8 8 0 1 1 0 16v3.5c-5-2-12-5-12-11.5a8 8 0 0 1 8-8zm2 14h2a6 6 0 1 0 0-12h-4a6 6 0 0 0-6 6c0 3.61 2.462 5.966 8 8.48V17z"></path>
+                </svg>
+                <span>Mándanos tu Feedback</span>
+              </a>
+              <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16.363636363636363" viewBox="0 0 33 27" fill="none">
+                  <path d="M27.9541 2.81323C25.818 1.81378 23.5339 1.08742 21.146 0.673828C20.8527 1.20404 20.5101 1.91719 20.2739 2.4845C17.7354 2.10275 15.2203 2.10275 12.7286 2.4845C12.4924 1.91719 12.142 1.20404 11.8461 0.673828C9.45561 1.08742 7.17151 1.81378 5.03542 2.81323C0.186257 9.56972 -0.349832 16.0273 0.45681 22.3221C2.71138 23.7421 4.86101 24.5393 6.97512 25.0871C7.68138 24.0734 8.32283 22.9985 8.8976 21.872C8.1115 21.5363 7.35826 21.1246 6.64299 20.6354C6.8579 20.487 7.06615 20.3324 7.27023 20.174C11.4254 23.0095 15.9363 24.5748 20.773 23.9597C21.6518 23.1206 22.4531 22.2206 23.1777 21.2683C23.3234 21.3741 23.4744 21.4735 23.6333 21.5651C23.193 22.5352 22.6825 23.4671 22.1078 24.3533C24.2439 24.8472 26.3767 24.4717 28.5435 23.9597C29.4223 17.7766 28.0107 11.438 27.9541 2.81323ZM10.4047 19.2307C7.41365 18.3328 4.8724 16.7493 2.93112 14.504C3.20802 14.2102 3.49665 13.9273 3.79386 13.6515C6.04329 15.0998 8.3599 16.2321 10.7135 17.0298C10.6416 17.4257 10.556 17.8238 10.4682 18.2219C10.447 18.318 10.4258 18.4141 10.4047 18.5092V19.2307ZM25.7803 12.4505C24.0926 17.1204 21.5775 21.2998 17.2598 23.4122C16.2295 23.9369 15.221 23.9637 14.1388 23.5973C12.8856 23.1608 11.7073 22.5516 10.5656 21.872C10.9642 20.7247 11.2598 19.5378 11.5145 18.3366C15.9325 20.0814 18.949 19.443 21.2637 17.5193C22.469 16.489 23.361 15.1682 24.2008 13.7822C24.7319 13.1796 25.2357 12.5606 25.7803 12.4505ZM9.32202 3.65218C9.98595 3.48192 10.6376 3.30574 11.2914 3.15629C11.6339 3.07986 12.1733 2.95138 12.4573 3.49592C11.241 4.08195 10.1063 4.83119 9.13057 5.68438C8.72163 5.34709 8.34786 4.98382 7.99748 4.59575C8.40641 4.2428 8.86052 3.94284 9.32202 3.65218ZM4.28829 12.8331C4.72363 13.2906 5.19614 13.7201 5.69702 14.1182C4.36795 15.5343 3.18059 17.071 2.52149 18.9637C1.33834 16.352 1.40553 13.494 2.52149 11.067C3.151 11.6426 3.72341 12.235 4.28829 12.8331ZM25.6347 4.82286C24.3878 5.85969 23.161 6.96421 21.8953 7.96848C21.2694 7.80135 20.6696 7.62013 20.0465 7.47343C19.7964 7.41497 19.4828 7.27957 19.5314 6.98956C20.6977 6.87951 21.8595 6.62242 22.9722 6.28418C23.1889 6.21797 23.8556 6.044 24.201 6.51364C24.6738 5.95058 25.1448 5.38583 25.6347 4.82286ZM25.7607 21.0383C25.2733 21.196 24.7786 21.3325 24.2821 21.4514C23.8825 21.541 23.4873 21.6211 23.0937 21.694C23.5975 21.0265 24.0736 20.3478 24.5104 19.644C24.7985 19.7408 25.0872 19.8402 25.373 19.9441C25.452 19.9709 25.5401 19.9999 25.6347 20.0388C25.6763 20.7476 25.718 20.7986 25.7607 21.0383Z" fill="#D1D5DB"></path>
+                </svg>
+                <span>Centro de ayuda</span>
+              </a>
+              <a href=" ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="none">
+                  <path d="M5.146 11.146a.5.5 0 0 1 .708.708L2.707 15h6.586a.5.5 0 0 1 0 1H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4zM16 8a.5.5 0 0 1-.5.5H3.5a.5.5 0 0 1 0-1H15.5a.5.5 0 0 1 .5.5zm0 4a.5.5 0 0 1-.5.5H3.5a.5.5 0 0 1 0-1H15.5a.5.5 0 0 1 .5.5zm0 4a.5.5 0 0 1-.5.5H3.5a.5.5 0 0 1 0-1H15.5a.5.5 0 0 1 .5.5zM10 10.5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-1 0v5z" fill="#D1D5DB"></path>
+                </svg>
+                <span>Cerrar sesión</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2 mt-4">
+        <h1>Acerca de nosotros</h1>
+        <p>Somos una tienda dedicada a proporcionar la mejor experiencia de compra de videojuegos en línea. Desde
+          los últimos lanzamientos hasta los clásicos atemporales, nos esforzamos por ofrecer una amplia selección
+          de títulos para satisfacer todos los gustos y preferencias.</p>
+        <p>Nuestra pasión por los videojuegos nos impulsa a proporcionar un servicio excepcional a nuestros
+          clientes. Nos esforzamos por ofrecer una experiencia de compra fácil, segura y emocionante para que
+          puedas encontrar y disfrutar de tus juegos favoritos sin problemas.</p>
+        <p>Además de ofrecer una amplia gama de juegos, también nos comprometemos a proporcionar contenido
+          informativo y entretenido, como reseñas, guías y noticias de la industria, para mantener a nuestra
+          comunidad informada y comprometida.</p>
+        <p>En Nuestra Tienda de Videojuegos, estamos aquí para ayudarte a explorar nuevos mundos, vivir aventuras
+          emocionantes y conectarte con otros jugadores de todo el mundo. ¡Gracias por elegirnos como tu destino
+          de videojuegos!</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
