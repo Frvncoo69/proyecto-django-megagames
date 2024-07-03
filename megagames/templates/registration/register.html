@@ -1,0 +1,33 @@
+
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+  {% if form.errors %}
+    <p>Tu nombre de usuario y contraseña no coinciden. Por favor, inténtalo de nuevo.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Su cuenta no tiene acceso a esta página. Para continuar, por favor inicie sesión con una cuenta que tenga acceso.</p>
+    {% else %}
+      <p>Por favor, inicia sesión para ver esta página.</p>
+    {% endif %}
+  {% endif %}
+
+  <h3>
+    REGISTRO DE USUARIO
+  </h3>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" value="REGISTRAR">
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
+
+  {# Assumes you set up the password_reset view in your URLconf #}
+  <p><a href="{% url 'password_reset' %}">¿Perdiste tu contraseña?</a></p>
+
+{% endblock %}

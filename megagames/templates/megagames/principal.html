@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -20,15 +20,14 @@
                     <img src="{% static 'megagames/img/logo.png' %}" alt="logo_1">
                 </a>
                 <!-- Icono de carrito -->
-                <a class="nav-link btn-icon" href="{% url 'carrito' %}"
-                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w03.org/2000/svg"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path
-                            d="M2 3h18l-2.58 12.94A2 2 0 0 1 15.48 18H6.52a2 2 0 0 1-1.94-1.06L2 3zm9 9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z">
-                        </path>
+                <a class="nav-link btn-icon" href="{% url 'carrito' %}" <svg xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns="http://www.w03.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path
+                        d="M2 3h18l-2.58 12.94A2 2 0 0 1 15.48 18H6.52a2 2 0 0 1-1.94-1.06L2 3zm9 9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z">
+                    </path>
                     </svg>
                 </a>
                 <!-- Fin del icono de carrito -->
@@ -41,20 +40,23 @@
                         <a href="{% url 'acercade' %}" class="nav-link">Acerca de</a>
                     </li>
                     <li>
-                        <a href="{% url 'soporte' %}"  class="nav-link">Soporte</a>
+                        <a href="{% url 'soporte' %}" class="nav-link">Soporte</a>
                     </li>
                 </ul>
             </div>
 
             <div class="nav-right">
-                <a class="nav-link btn-primary" href="{% url 'crearusuario' %}">
+                {% if not user.is_authenticated %}
+                <a class="nav-link btn-primary" href="{% url 'register' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                         <path d="M12 19v-7m0 0V5m0 7H5m7 0h7" stroke="#F2F2F2" fill="none" stroke-width="2px"></path>
                     </svg>
                     Crear cuenta
                 </a>
+                {% endif %}
                 <div class="nav-right">
+                    {% if not user.is_authenticated %}
                     <a class="nav-link btn-primary" href="{% url 'login' %}">
                         <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -64,6 +66,7 @@
                         </svg>
                         Iniciar sesión
                     </a>
+                    {% endif %}
 
                     <button class="nav-link btn-icon">
                         <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +77,8 @@
                                 stroke="#F2F2F2" fill="none" stroke-width="2px"></path>
                         </svg>
                     </button>
+
+                    {% if user.is_authenticated %}
                     <div class="dropdown-container">
                         <a href="#" class="nav-link btn-profile">
                             <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +87,7 @@
                                 <path fill="#F2F2F2" d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z">
                                 </path>
                             </svg>
-                            <span>Usuario</span>
+                            <span>{{ user.username | upper }}</span>
                         </a>
 
                         <div class="dropdown-menu profile-dropdown">
@@ -115,7 +120,9 @@
                                 </svg>
                                 <span>Unete a nuestro Discord</span>
                             </a>
-                            <a href="#">
+
+
+                            <a href="{% url 'exit' %}">
                                 <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" width="20" height="20">
@@ -127,6 +134,8 @@
                             </a>
                         </div>
                     </div>
+
+                    {% endif %}
 
                     <div class="menu-icon">
                         <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
@@ -176,8 +185,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{% static 'megagames/img/l1.jpg'%}" 
-                    class="d-block w-100" alt="...">
+                    <img src="{% static 'megagames/img/l1.jpg'%}" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
                     <img src="{% static 'megagames/img/l2.jpg'%}" class="d-block w-100" alt="...">
@@ -226,36 +234,40 @@
 
     </section>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content-container">
-                <h3 class="website-logo">Mega Games</h3>
-                <span class="footer-info">+569 9876 5432</span>
-                <span class="footer-info">megagames@gmail.com</span>
-            </div>
-            <div class="footer-menus">
-                <div class="footer-content-container">
-                    <span class="menu-title">menu</span>
-                    <a href="{% url 'principal' %}"class="menu-item-footer">Pagina principal</a>
-                    <a href="{% url 'acercade' %}"class="menu-item-footer">Acerca de nosotros</a>
-                    <a href="{% url 'soporte' %}" class="menu-item-footer">Soporte</a>
-                </div>
-            </div>
+    {% block content %}{% endblock %}
 
-            <div class="footer-content-container">
-                <span class="menu-title">Comunidad Discord</span>
-                <div class="social-container">
-                    <a href="" class="social-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-container">
-            <span class="copyright">Copyright 2024, Todos los derechos reservados.</span>
-        </div>
-    </footer>
 </body>
 
+<footer>
+    <div class="footer-container">
+        <div class="footer-content-container">
+            <h3 class="website-logo">Mega Games</h3>
+            <span class="footer-info">+569 9876 5432</span>
+            <span class="footer-info">megagames@gmail.com</span>
+        </div>
+        <div class="footer-menus">
+            <div class="footer-content-container">
+                <span class="menu-title">menu</span>
+                <a href="{% url 'principal' %}" class="menu-item-footer">Pagina principal</a>
+                <a href="{% url 'acercade' %}" class="menu-item-footer">Acerca de nosotros</a>
+                <a href="{% url 'soporte' %}" class="menu-item-footer">Soporte</a>
+            </div>
+        </div>
+
+        <div class="footer-content-container">
+            <span class="menu-title">Comunidad Discord</span>
+            <div class="social-container">
+                <a href="" class="social-link"></a>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-container">
+        <span class="copyright">Copyright 2024, Todos los derechos reservados.</span>
+    </div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-crossorigin="anonymous"></script>
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
 </html>

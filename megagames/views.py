@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import juego
-from .forms import JuegoForm
+from .forms import JuegoForm, CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 def principal (request):
     context ={}
@@ -26,18 +28,27 @@ def juegounico (request):
     context ={}
     return render (request, 'megagames/juego-unico.html',context)
 
+@login_required
 def juegos(request):
     juegos = juego.objects.all()  # Obtén todos los juegos desde la base de datos
     context = {'juegos': juegos}  # Crea un contexto con los juegos
     return render(request, 'megagames/juegos.html', context)  # Renderiza la plantilla con el contexto}
 
-def login (request):
-    context ={}
-    return render (request, 'megagames/login.html',context)
+# USUARIOS
+def exit(request):
+    logout(request)
+    return redirect('principal')
 
-def tienda (request):
-    context ={}
-    return render (request, 'megagames/tienda.html',context)
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
 
 ###########
 
@@ -61,7 +72,7 @@ def editar_juego(request, nombre):
         form = JuegoForm(request.POST, request.FILES, instance=juego_obj)
         if form.is_valid():
             form.save()
-            return redirect('lista_juegos')
+            return redirect('lista_juegos', nombre=nombre)  # Redirect correctly
     else:
         form = JuegoForm(instance=juego_obj)
     return render(request, 'megagames/editar_juego.html', {'form': form, 'titulo': f'Editar {juego_obj.nombre}'})
@@ -72,3 +83,23 @@ def eliminar_juego(request, nombre):
         juego_obj.delete()
         return redirect('lista_juegos')
     return render(request, 'megagames/eliminar_juego.html', {'juego': juego_obj})
+
+###  USUARIO
+
+
+# def usuario_login(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             user = authenticate(usuario=form.cleaned_data["usuario"], contraseña=form.cleaned_data["contraseña"])
+#             if user is not None:
+#                 login(request, user)
+#                 messages.success(request, "¡Te has registrado correctamente! Bienvenid@ ")
+#                 return redirect('principal')
+#     else:
+#         form = UserCreationForm()
+
+#     return render(request, 'megagames/crearusuario.html', {'form': form})
+
+
